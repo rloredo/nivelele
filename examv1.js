@@ -27,8 +27,6 @@ var subject_id = jsPsych.randomization.randomID(5);
 
 // Funcion save_data
 var serverComm = {};
-serverComm.logging = false;
-
 serverComm.save_data = function(data){
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'php/save_data.php');
@@ -176,7 +174,8 @@ var pedirNombre = {
       //Limpiar el texto
       var nameData2 = nameData.replace(/{"Q0":"/gi, "");
       var nameData3 = nameData2.replace(/","Q1":"/gi, "_");
-    var nombre = nameData3.replace(/"}/gi, "");
+    var nameData1 = nameData3.replace(/"}/gi, "");
+    var nombre = nameData1.replace(/","Q2":"/gi, "");
     var nombreUP = nombre.toUpperCase();
     // Con esto se suma a todas las respuestas
     jsPsych.data.addProperties({
@@ -1152,8 +1151,8 @@ jsPsych.init({
   show_progress_bar: true,
   timeline: timeline,
   on_finish: function(){
-    finalAlert();
-//   jsPsych.data.displayData();
+  //  finalAlert();
+ jsPsych.data.displayData();
   }
 
 });
