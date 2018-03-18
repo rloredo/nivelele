@@ -27,6 +27,8 @@ var subject_id = jsPsych.randomization.randomID(5);
 
 // Funcion save_data
 var serverComm = {};
+serverComm.logging = false;
+
 serverComm.save_data = function(data){
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'php/save_data.php');
