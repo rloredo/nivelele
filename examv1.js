@@ -126,8 +126,6 @@ jsPsych.data.addDataToLastTrial({
 // Función chequear tiempo y terminar si se acaba
 function checkTime(){
   var tiempo = jsPsych.totalTime()-iniTime;
-  console.log(tiempo)
-  console.log(tiempoLimite)
    if (tiempo > tiempoLimite) {
     generateLevelName();
     serverComm.save_data(jsPsych.data.get().values());
@@ -1124,23 +1122,23 @@ timeline.push(instrucciones)
 for (i=0; i<=7; i++){
   timeline = timeline.concat(bloque_A1_RND[i]);
 }
-console.log(timeline)
+
 for (i=0; i<=9; i++){
   timeline = timeline.concat(bloque_A2_RND[i]);
 }
-console.log(timeline)
+
 for (i=0; i<=11; i++){
   timeline = timeline.concat(bloque_B1_RND[i]);
 }
-console.log(timeline)
+
 for (i=0; i<=14; i++){
   timeline = timeline.concat(bloque_B2_RND[i]);
 }
-console.log(timeline)
+
 for (i=0; i<=14; i++){
   timeline = timeline.concat(bloque_C1_RND[i]);
 }
-console.log(timeline)
+
 
 timeline.push(preSave)
 timeline.push(saveFinal)
