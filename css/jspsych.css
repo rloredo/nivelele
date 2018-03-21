@@ -31,6 +31,8 @@
  }
 
  .jspsych-content {
+   min-height: 75%;
+   overflow: auto;
    width: 60%; /* this is mainly an IE 10-11 fix */
    height: 75%;
    text-align: center;
