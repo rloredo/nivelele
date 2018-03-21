@@ -4,7 +4,7 @@ $servername = "localhost";
 $username = "username";
 $password = "password";
 $dbname = "database";
-$table_data = "data_log";
+$table = "data_log";
 $port = 3306;
 
 ?>
