@@ -1135,11 +1135,11 @@ for (i=0; i<=7; i++){
  for (i=0; i<=14; i++){
    timeline = timeline.concat(bloque_B2_RND[i]);
  }
-
+*/
  for (i=0; i<=14; i++){
    timeline = timeline.concat(bloque_C1_RND[i]);
  }
-*/
+
 
 timeline.push(preSave)
 timeline.push(saveFinal)
@@ -1152,6 +1152,7 @@ jsPsych.init({
   timeline: timeline,
   on_finish: function(){
   finalAlert();
+  window.location.href = 'final.html';
  //jsPsych.data.displayData();
   }
 
