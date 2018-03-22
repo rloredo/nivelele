@@ -7,6 +7,9 @@
 
  /* Container holding jsPsych content */
 
+.body{
+  background-color: #656565;
+}
  .jspsych-display-element {
    display: flex;
    flex-direction: column;
@@ -27,7 +30,7 @@
    margin: auto; /* this does the same thing as above two lines in this case */
    flex: 1 1 100%;
    width: 100%;
-   background-color:#d9d9d9;
+   background-color:#656565;
  }
 
  .jspsych-content {
@@ -190,7 +193,6 @@ font-family: 'Montserrat', sans-serif;
   color: #555;
   border-bottom: 1px solid #dedede;
   background-color: #f9f9f9;
-  margin-bottom: 1em;
   text-align: center;
   padding: 8px 0px 16px;
   width: 100%;

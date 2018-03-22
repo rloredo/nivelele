@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Bree+Serif|Montserrat');
 
 .body{
-  background-color: #d9d9d9;
-  margin-top: 3%;
-  margin-left: 10%;
-  margin-right: 10%;
+  background-color: #656565;
+  margin-top: 5%;
   margin-bottom: auto;
 }
 
 .wrapper{
-  max-width: 99%;
+  max-width: 100%;
   border: 1px groove #666666;
   background-color: #f0f0f0;
   border-radius: 4px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .contenido{
   background-color: #f0f0f0;
-  padding: 5% 5% 5% 5%;
+  padding: 2% 2% 2% 2%;
   font-family: 'Montserrat', sans-serif;
 
 }
@@ -55,4 +55,32 @@ h1 {
   color: #333;
   background-color: #fff;
   border-color: #ccc;
+}
+
+.footer{
+  max-width: 100%;
+  margin: 0 auto;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.logo-container{
+  padding: 2% 2% 2% 2%;
+}
+
+.logos{
+  display: inline-block;
+  margin-left: 2%;
+  margin-right: 4%
+}
+
+
+.logos_uba{
+  display: inline-block;
+  margin-left: 8%;
+}
+
+.logos_cer{
+  display: inline-block;
+  margin-left: 2%;
 }
