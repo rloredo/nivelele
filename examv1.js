@@ -20,7 +20,7 @@ var contador_C1 = 0;
 
 // Tiempo limite del Examen en milisegundos.
 
-var tiempoLimite = 1800000; // 30 minutos
+var tiempoLimite = 180; // 30 minutos
 
 // generate a random subject ID with 5 characters
 var subject_id = jsPsych.randomization.randomID(5);
@@ -115,7 +115,7 @@ function generateLevelName(){
 } else if (contador_C1 < 10) {nivel = "B2"
 } else                      {nivel = "C1"
 };
-mensaje_final = ["Se ha terminado el tiempo para realizar la prueba de nivel.<br> Sus respuestas han sido guardadas. Su nivel es: "+ nivel ];
+mensaje_final = ["<div style='padding-top:10%;'><p>Se ha terminado el tiempo para realizar la prueba de nivel.</p><p> Sus respuestas han sido guardadas. <br> Su nivel es: "+ nivel +"</p></div>"];
 jsPsych.data.addProperties({
        nivelObtenido: nivel
      });
@@ -137,6 +137,10 @@ function checkTime(){
 
 // Función mostrar alerta final
 
+function gofinal(){
+  window.location.href = 'final.html';
+}
+
 function alertTimeout(){
   alert('Se ha terminado el tiempo. Puede cerrar el navegador.')
 }
@@ -146,9 +150,11 @@ function finalAlert(){
 
   var tiempoFinal = jsPsych.totalTime()-iniTime;
   if (tiempoFinal > tiempoLimite) {
-    setTimeout(alertTimeout, 1500)
+    setTimeout(alertTimeout, 1500);
+    setTimeout(gofinal, 2000)
   } else {
-    alert('Ha terminado el examen. Puede cerrar el navegador.')
+    alert('Ha terminado el examen. Puede cerrar el navegador.');
+    setTimeout(gofinal, 2000)
   }
 
 }
@@ -1123,7 +1129,7 @@ timeline.push(instrucciones)
 for (i=0; i<=7; i++){
   timeline = timeline.concat(bloque_A1_RND[i]);
 }
-
+/*
  for (i=0; i<=9; i++){
  timeline = timeline.concat(bloque_A2_RND[i]);
  }
@@ -1135,7 +1141,7 @@ for (i=0; i<=7; i++){
  for (i=0; i<=14; i++){
    timeline = timeline.concat(bloque_B2_RND[i]);
  }
-
+*/
  for (i=0; i<=14; i++){
    timeline = timeline.concat(bloque_C1_RND[i]);
  }
@@ -1152,7 +1158,6 @@ jsPsych.init({
   timeline: timeline,
   on_finish: function(){
   finalAlert();
-  window.location.href = 'final.html';
  //jsPsych.data.displayData();
   }
 
