@@ -20,7 +20,7 @@ var contador_C1 = 0;
 
 // Tiempo limite del Examen en milisegundos.
 
-var tiempoLimite = 180; // 30 minutos
+var tiempoLimite = 1800000; // 30 minutos
 
 // generate a random subject ID with 5 characters
 var subject_id = jsPsych.randomization.randomID(5);
