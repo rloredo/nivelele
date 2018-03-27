@@ -1,11 +1,6 @@
 # nivelele
 Examen de nivel
 
-*****
-¡CUIDADO! Líneas 1126 a 1142 de examv1.js comentadas para testeo de base. Descomentar para testeo final.
-*****
-
-
 
 Crear base mySql con las siguientes 16 columnas:
 
