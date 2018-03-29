@@ -107,7 +107,6 @@ function contadorCorrectoC1(trial_data, opciones){
 };
 
 // Funcion: evaluar nivel y sumar nivel a columna
-
 function generateLevelName(){
       if (contador_A1 < 6)                                                                                        { nivel = "inferior a A1"
     } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
@@ -116,7 +115,7 @@ function generateLevelName(){
     } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
     } else                                                                                                        {nivel = "C1"
   };  
- 
+
 mensaje_final = ["<div style='padding-top:10%;'><p>Se ha terminado el tiempo para realizar la prueba de nivel.</p><p> Sus respuestas han sido guardadas. <br> Su nivel es: "+ nivel +"</p></div>"];
 jsPsych.data.addProperties({
        nivelObtenido: nivel
