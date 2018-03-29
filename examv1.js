@@ -1131,7 +1131,7 @@ timeline.push(instrucciones)
 for (i=0; i<=7; i++){
   timeline = timeline.concat(bloque_A1_RND[i]);
 }
-/*
+
  for (i=0; i<=9; i++){
  timeline = timeline.concat(bloque_A2_RND[i]);
  }
@@ -1143,7 +1143,7 @@ for (i=0; i<=7; i++){
  for (i=0; i<=14; i++){
    timeline = timeline.concat(bloque_B2_RND[i]);
  }
-*/
+
  for (i=0; i<=14; i++){
    timeline = timeline.concat(bloque_C1_RND[i]);
  }
