@@ -1065,14 +1065,17 @@ var preSave = {
   type: 'html-keyboard-response',
   stimulus: '',
   trial_duration: 10,
-  on_finish: function(trial_data){
-    if (contador_A1 < 4) { nivel = "inferior a A1"
-  } else if (contador_A2 < 4) {nivel = "A1"
-  } else if (contador_B1 < 4) {nivel = "A2"
-  } else if (contador_B2 < 4) {nivel = "B1"
-  } else if (contador_C1 < 4) {nivel = "B2"
-  } else                      {nivel = "C1"
-  };
+  on_finish: function(trial_data){   
+    
+      if (contador_A1 < 6)                                                                                        {nivel = "inferior a A1"
+    } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
+    } else                                                                                                        {nivel = "C1"
+    }; 
+
+        
   jsPsych.data.addDataToLastTrial({
          niveles: nivel
        });
@@ -1085,13 +1088,13 @@ var preSave = {
 var saveFinal = {
     type: 'call-function',
     func: function(){
-      if (contador_A1 < 6) { nivel = "inferior a A1"
-  } else if (contador_A2 < 7) {nivel = "A1"
-  } else if (contador_B1 < 8) {nivel = "A2"
-  } else if (contador_B2 < 10) {nivel = "B1"
-  } else if (contador_C1 < 10) {nivel = "B2"
-  } else                      {nivel = "C1"
-  };
+       if (contador_A1 < 6)                                                                                        {nivel = "inferior a A1"
+    } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
+    } else                                                                                                        {nivel = "C1"
+    }; 
   jsPsych.data.addProperties({
          nivelObtenido: nivel
        });
@@ -1106,13 +1109,13 @@ var cierre = {
     type: 'html-keyboard-response',
     stimulus: function(){
       var nivel = [];
-    if (contador_A1 < 6) { nivel = "inferior a A1"
-  } else if (contador_A2 < 7) {nivel = "A1"
-  } else if (contador_B1 < 8) {nivel = "A2"
-  } else if (contador_B2 < 10) {nivel = "B1"
-  } else if (contador_C1 < 10) {nivel = "B2"
-  } else                      {nivel = "C1"
-  };
+     if (contador_A1 < 6)                                                                                         {nivel = "inferior a A1"
+    } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
+    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
+    } else                                                                                                        {nivel = "C1"
+    }; 
   return "<div style='padding-top:20px;'><p>Se ha terminado el examen. Su nivel es "+ nivel + "</p><p> Presione cualquier tecla para terminar.</p></div>";
 
 },
