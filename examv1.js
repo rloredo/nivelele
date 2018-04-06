@@ -1,5 +1,5 @@
-  //=======================================//
- //     Examen nivel v 1.0                //
+//=======================================//
+//     Examen nivel v 1.0                //
 //=======================================//
 
 //Variables que se van a usar después
@@ -10,6 +10,8 @@ var boton = "Continuar";
 var iniTime = [];
 var guardar = [];
 var mensaje_final = [];
+var cred = [];
+var credencial_ok = false;
 
 //Variables contador de respuestas
 var contador_A1 = 0;
@@ -27,136 +29,142 @@ var subject_id = jsPsych.randomization.randomID(5);
 
 // Funcion save_data
 function save_data() {
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'php/write_data.php'); // change 'write_data.php' to point to php script.
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-  xhr.onload = function() {
-    if(xhr.status == 200){
-      var response = JSON.parse(xhr.responseText);
-      console.log(response.success);
-    }
-  };
-  xhr.send(jsPsych.data.get().json());
+var xhr = new XMLHttpRequest();
+xhr.open('POST', 'php/write_data.php'); // change 'write_data.php' to point to php script.
+xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+xhr.onload = function() {
+  if(xhr.status == 200){
+    var response = JSON.parse(xhr.responseText);
+    console.log(response.success);
+  }
+};
+xhr.send(jsPsych.data.get().json());
 }
 
 // Funciones contadores
 //Contador A1
 function contadorCorrectoA1(trial_data, opciones){
-  var resp_dad_com = trial_data.responses;
-  var resp_dad = resp_dad_com.slice(11);
-  var resp_cor = opciones[0]+'"}';
-  var correct = (resp_dad == resp_cor);
-  var correct_txt = correct.toString();
-  jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
-  if (correct == true) {
-    contador_A1 = contador_A1+1;
-   };
+var resp_dad_com = trial_data.responses;
+var resp_dad = resp_dad_com.slice(11);
+var resp_cor = opciones[0]+'"}';
+var correct = (resp_dad == resp_cor);
+var correct_txt = correct.toString();
+jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
+if (correct == true) {
+  contador_A1 = contador_A1+1;
+ };
 };
 
 //Contador A2
 function contadorCorrectoA2(trial_data, opciones){
-  var resp_dad_com = trial_data.responses;
-  var resp_dad = resp_dad_com.slice(11);
-  var resp_cor = opciones[0]+'"}';
-  var correct = (resp_dad == resp_cor);
-  var correct_txt = correct.toString();
-  jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
-  if (correct == true) {
-    contador_A2 = contador_A2+1;
-   };
+var resp_dad_com = trial_data.responses;
+var resp_dad = resp_dad_com.slice(11);
+var resp_cor = opciones[0]+'"}';
+var correct = (resp_dad == resp_cor);
+var correct_txt = correct.toString();
+jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
+if (correct == true) {
+  contador_A2 = contador_A2+1;
+ };
 };
 
 //Contador b1
 function contadorCorrectoB1(trial_data, opciones){
-  var resp_dad_com = trial_data.responses;
-  var resp_dad = resp_dad_com.slice(11);
-  var resp_cor = opciones[0]+'"}';
-  var correct = (resp_dad == resp_cor);
-  var correct_txt = correct.toString();
-  jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
-  if (correct == true) {
-    contador_B1 = contador_B1+1;
-   };
+var resp_dad_com = trial_data.responses;
+var resp_dad = resp_dad_com.slice(11);
+var resp_cor = opciones[0]+'"}';
+var correct = (resp_dad == resp_cor);
+var correct_txt = correct.toString();
+jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
+if (correct == true) {
+  contador_B1 = contador_B1+1;
+ };
 };
 
 //Contador b2
 function contadorCorrectoB2(trial_data, opciones){
-  var resp_dad_com = trial_data.responses;
-  var resp_dad = resp_dad_com.slice(11);
-  var resp_cor = opciones[0]+'"}';
-  var correct = (resp_dad == resp_cor);
-  var correct_txt = correct.toString();
-  jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
-  if (correct == true) {
-    contador_B2 = contador_B2+1;
-   };
+var resp_dad_com = trial_data.responses;
+var resp_dad = resp_dad_com.slice(11);
+var resp_cor = opciones[0]+'"}';
+var correct = (resp_dad == resp_cor);
+var correct_txt = correct.toString();
+jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
+if (correct == true) {
+  contador_B2 = contador_B2+1;
+ };
 };
 
 
 //Contador c1
 function contadorCorrectoC1(trial_data, opciones){
-  var resp_dad_com = trial_data.responses;
-  var resp_dad = resp_dad_com.slice(11);
-  var resp_cor = opciones[0]+'"}';
-  var correct = (resp_dad == resp_cor);
-  var correct_txt = correct.toString();
-  jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
-  if (correct == true) {
-    contador_C1 = contador_C1+1;
-   };
+var resp_dad_com = trial_data.responses;
+var resp_dad = resp_dad_com.slice(11);
+var resp_cor = opciones[0]+'"}';
+var correct = (resp_dad == resp_cor);
+var correct_txt = correct.toString();
+jsPsych.data.addDataToLastTrial({es_correct: correct_txt});
+if (correct == true) {
+  contador_C1 = contador_C1+1;
+ };
 };
 
 // Funcion: evaluar nivel y sumar nivel a columna
 function generateLevelName(){
-      if (contador_A1 < 6)                                                                                        { nivel = "inferior a A1"
-    } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
-    } else                                                                                                        {nivel = "C1"
-  };  
+    if (contador_A1 < 6)                                                                                        { nivel = "inferior a A1"
+  } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
+  } else                                                                                                        {nivel = "C1"
+};
 
-mensaje_final = ["<div style='padding-top:10%;'><p>Se ha terminado el tiempo para realizar la prueba de nivel.</p><p> Sus respuestas han sido guardadas. <br> Su nivel es: "+ nivel +"</p></div>"];
+mensaje_final = ["<div style='padding-top:10%;'><p>Se ha terminado el tiempo para realizar la prueba de nivel.</p><p> Sus respuestas han sido guardadas.</div>"];
 jsPsych.data.addProperties({
-       nivelObtenido: nivel
-     });
+     nivelObtenido: nivel
+   });
 jsPsych.data.addDataToLastTrial({
-       niveles: nivel
-     });
+     niveles: nivel
+   });
 };
 
 
 // Función chequear tiempo y terminar si se acaba
 function checkTime(){
-  var tiempo = jsPsych.totalTime()-iniTime;
-   if (tiempo > tiempoLimite) {
-    generateLevelName();
-    save_data();
-     jsPsych.endExperiment(mensaje_final);
-     }
+var tiempo = jsPsych.totalTime()-iniTime;
+ if (tiempo > tiempoLimite) {
+  generateLevelName();
+  save_data();
+   jsPsych.endExperiment(mensaje_final);
+   }
 }
 
 // Función mostrar alerta final
 
 function gofinal(){
-  window.location.href = 'final.html';
+window.location.href = 'final.html';
+}
+
+function reset(){
+  window.location.href = 'examen.html';
 }
 
 function alertTimeout(){
-  alert('Se ha terminado el tiempo. Puede cerrar el navegador.')
+alert('Se ha terminado el tiempo. Puede cerrar el navegador.')
 }
 
 
 function finalAlert(){
 
-  var tiempoFinal = jsPsych.totalTime()-iniTime;
-  if (tiempoFinal > tiempoLimite) {
-    setTimeout(alertTimeout, 1500);
-    setTimeout(gofinal, 2000)
-  } else {
-    alert('Ha terminado el examen. Puede cerrar el navegador.');
-    setTimeout(gofinal, 2000)
-  }
+var tiempoFinal = jsPsych.totalTime()-iniTime;
+if (tiempoFinal > tiempoLimite) {
+  setTimeout(alertTimeout, 1500);
+  setTimeout(gofinal, 2000)
+} else if (credencial_ok != true) {
+  setTimeout(reset, 20000)
+} else {
+  alert('Ha terminado el examen. Puede cerrar el navegador.');
+  setTimeout(gofinal, 2000)
+}
 
 }
 
@@ -168,62 +176,95 @@ function finalAlert(){
 
 // Bienvenida
 var bienvenida = {
-    type: 'html-keyboard-response',
-    stimulus: "<p style='padding-top:10%'>Bienvenido a la prueba de nivel.<br></p><p> Presione cualquier tecla para comenzar.</p>"
+  type: 'html-keyboard-response',
+  stimulus: "<p style='padding-top:10%'>La credencial ingresada es correcta.<br></p><p> Presione cualquier tecla para comenzar.</p>"
+};
+
+//Credenciales
+var pedirCredenciales = {
+type: 'survey-text',
+questions: [{prompt: "<p style='font-size:22px;'> Bienvenidos a la prueba de nivel</p><p>&nbsp;</p>Escriba su credencial"}, {prompt: "Complete con el nombre de la institución"}],
+button_label: boton,
+on_finish: function (trial_data){
+  var credencialData = trial_data.responses;
+  var credencialData2 = credencialData.replace(/{"Q0":"/gi, "");
+  var credencialData3 = credencialData2.split(",");
+  var credencialData4 = credencialData3[0].replace(/"/gi, "");
+  var numCred1 = credencialData4.slice(-14);
+  var numCred = numCred1.slice(0,4);
+  var separador = credencialData4.slice(-15);
+  var mensaje_badcred = "<div style='padding-top:10%;'><p>Credencial incorrecta</p><p>Intente nuevamente</p><p>&nbsp;</p><button class='butt' onclick='reset()'><p>Aceptar</p></button></div>"
+  var checknum = numCred >= 0 && numCred <=9999;
+  if (credencialData4.length !=  26) {
+    jsPsych.endExperiment(mensaje_badcred)
+    credencial_ok = false
+  } else if (checknum != true) {
+    jsPsych.endExperiment(mensaje_badcred)
+    credencial_ok = false
+  } else if (separador[0] != "+") {
+    jsPsych.endExperiment(mensaje_badcred)
+    credencial_ok = false
+  } else {
+    cred = credencialData4;
+    credencial_ok = true
+  }
 }
+};
+
+
 
 
 //Nombre
 var pedirNombre = {
-  type: 'survey-text',
-  questions: [{prompt: "Escriba su nombre"}, {prompt: "<p>Escriba su apellido</p>"}, {prompt: "<p>&nbsp;</p>Escriba su correo electrónico"}],
-  button_label: boton,
-  // Función para sumar el nombre en todos los estímulos como código en una columna
-    on_finish: function (trial_data){var nameData = trial_data.responses;
-      //Limpiar el texto
-      var nameData2 = nameData.replace(/{"Q0":"/gi, "");
-      var nameData3 = nameData2.replace(/","Q1":"/gi, "_");
+type: 'survey-text',
+questions: [{prompt: "Escriba su nombre"}, {prompt: "<p>Escriba su apellido</p>"}, {prompt: "Escriba su correo electrónico"}],
+button_label: boton,
+// Función para sumar el nombre en todos los estímulos como código en una columna
+  on_finish: function (trial_data){var nameData = trial_data.responses;
+    //Limpiar el texto
+    var nameData2 = nameData.replace(/{"Q0":"/gi, "");
+    var nameData3 = nameData2.replace(/","Q1":"/gi, ",");
     var nameData1 = nameData3.replace(/"}/gi, "");
-    var nombre = nameData1.replace(/","Q2":"/gi, "_ma:");
-    // Con esto se suma a todas las respuestas
-    jsPsych.data.addProperties({
-           alumno: nombre + "_" + subject_id
-         });}
+    var nombre = nameData1.replace(/","Q2":"/gi, ",ma:");
+  // Con esto se suma a todas las respuestas
+  jsPsych.data.addProperties({
+         alumno: nombre + "," + subject_id + "," + cred
+       });}
 };
 
 
 // Instrucciones
 
 var instrucciones = {
-  type: 'instructions',
-  pages: ['<span style="text-align: justify;"><p><b>Instrucciones:</b></p><p>- Esta prueba contiene 60 preguntas de opción múltiple.<br>- Tiene 30 minutos para realizar la prueba.</p></span>',
-    '<span style="text-align: justify;"><p><b>Instrucciones:</b></p><p>- Usted debe elegir la opción correcta para cada pregunta. <br>- Debe seleccionar una sola respuesta (a, b o c) en cada pregunta. <br>- Una vez enviada la respuesta, no podrá volver hacia atrás en las preguntas.</span>','<p style="text-align:center; padding-top:40px;"><b>Al presionar siguiente comenzará la prueba</b></p>'],
-  show_clickable_nav: true,on_finish: function(){
-    // Mostrar texto de timer
-    document.getElementById('timerTxt').className = "timerTxtShow";
-    // Iniciar Timer del examen
+type: 'instructions',
+pages: ['<span style="text-align: justify;"><p><b>Instrucciones:</b></p><p>- Esta prueba contiene 60 preguntas de opción múltiple.<br>- Tiene 30 minutos para realizar la prueba.</p></span>',
+  '<span style="text-align: justify;"><p><b>Instrucciones:</b></p><p>- Usted debe elegir la opción correcta para cada pregunta. <br>- Debe seleccionar una sola respuesta (a, b o c) en cada pregunta. <br>- Una vez enviada la respuesta, no podrá volver hacia atrás en las preguntas.</span>','<p style="text-align:center; padding-top:40px;"><b>Al presionar siguiente comenzará la prueba</b></p>'],
+show_clickable_nav: true,on_finish: function(){
+  // Mostrar texto de timer
+  document.getElementById('timerTxt').className = "timerTxtShow";
+  // Iniciar Timer del examen
+  document.getElementById('timer').innerHTML =
+    30 + ":" + 0;
+  startTimer();
+  function startTimer() {
+    var presentTime = document.getElementById('timer').innerHTML;
+    var timeArray = presentTime.split(/[:]+/);
+    var m = timeArray[0];
+    var s = checkSecond((timeArray[1] - 1));
+    if(s==59){m=m-1}
+    if(m<0){var m=0; var s=0};
     document.getElementById('timer').innerHTML =
-      30 + ":" + 0;
-    startTimer();
-    function startTimer() {
-      var presentTime = document.getElementById('timer').innerHTML;
-      var timeArray = presentTime.split(/[:]+/);
-      var m = timeArray[0];
-      var s = checkSecond((timeArray[1] - 1));
-      if(s==59){m=m-1}
-      if(m<0){var m=0; var s=0};
-      document.getElementById('timer').innerHTML =
-        m + ":" + s;
-      setTimeout(startTimer, 1000);
-    }
-    function checkSecond(sec) {
-      if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
-      if (sec < 0) {sec = "59"};
-      return sec;
-    }
-    // Setear variable tiempo de inicio
-    iniTime = jsPsych.totalTime();
+      m + ":" + s;
+    setTimeout(startTimer, 1000);
   }
+  function checkSecond(sec) {
+    if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+    if (sec < 0) {sec = "59"};
+    return sec;
+  }
+  // Setear variable tiempo de inicio
+  iniTime = jsPsych.totalTime();
+}
 
 }
 
@@ -609,446 +650,446 @@ var bloque_C1 = [];
 
 // Items A1
 var stim_A1G1 = {
-      type: 'survey-multi-choice',
-      questions: [{prompt: preguntas_A1G1, options: opciones_A1G1_final, horizontal: false}],
-      data: {pregunta: codigo_A1G1, opciones_mostradas: opciones_A1G1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){
-          contadorCorrectoA1(trial_data, opciones_A1G1);
-          checkTime();
-        }
-        };
+    type: 'survey-multi-choice',
+    questions: [{prompt: preguntas_A1G1, options: opciones_A1G1_final, horizontal: false}],
+    data: {pregunta: codigo_A1G1, opciones_mostradas: opciones_A1G1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){
+        contadorCorrectoA1(trial_data, opciones_A1G1);
+        checkTime();
+      }
+      };
 bloque_A1.push(stim_A1G1)
 
 var stim_A1G2 = {
-      type: 'survey-multi-choice',
-      questions: [{prompt: preguntas_A1G2, options: opciones_A1G2_final, horizontal: false}],
-      data: {pregunta: codigo_A1G2, opciones_mostradas: opciones_A1G2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){
-            contadorCorrectoA1(trial_data, opciones_A1G2);
-            checkTime();
-        }
-    };
+    type: 'survey-multi-choice',
+    questions: [{prompt: preguntas_A1G2, options: opciones_A1G2_final, horizontal: false}],
+    data: {pregunta: codigo_A1G2, opciones_mostradas: opciones_A1G2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){
+          contadorCorrectoA1(trial_data, opciones_A1G2);
+          checkTime();
+      }
+  };
 bloque_A1.push(stim_A1G2)
 
-    var stim_A1G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1G3,
-       options: opciones_A1G3_final, horizontal: false}],
-       data: {pregunta: codigo_A1G3, opciones_mostradas: opciones_A1G3_final.toString()},
-        button_label: boton,
-        on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1G3); checkTime();}};
+  var stim_A1G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1G3,
+     options: opciones_A1G3_final, horizontal: false}],
+     data: {pregunta: codigo_A1G3, opciones_mostradas: opciones_A1G3_final.toString()},
+      button_label: boton,
+      on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1G3); checkTime();}};
 
 bloque_A1.push(stim_A1G3)
 
 
-    var stim_A1L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1L1,
-      options: opciones_A1L1_final, horizontal: false}],
-      data: {pregunta: codigo_A1L1, opciones_mostradas: opciones_A1L1_final.toString()},
-      button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1L1); checkTime();}};
+  var stim_A1L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1L1,
+    options: opciones_A1L1_final, horizontal: false}],
+    data: {pregunta: codigo_A1L1, opciones_mostradas: opciones_A1L1_final.toString()},
+    button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1L1); checkTime();}};
 bloque_A1.push(stim_A1L1)
 
-    var stim_A1L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1L2,
-       options: opciones_A1L2_final, horizontal: false}],
-       data: {pregunta: codigo_A1L2, opciones_mostradas: opciones_A1L2_final.toString()},
-        button_label: boton,
-        on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1L2); checkTime();}};
+  var stim_A1L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1L2,
+     options: opciones_A1L2_final, horizontal: false}],
+     data: {pregunta: codigo_A1L2, opciones_mostradas: opciones_A1L2_final.toString()},
+      button_label: boton,
+      on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1L2); checkTime();}};
 bloque_A1.push(stim_A1L2)
 
-    var stim_A1L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1L3,
-      options: opciones_A1L3_final, horizontal: false}],
-      data: {pregunta: codigo_A1L3, opciones_mostradas: opciones_A1L3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1L3); checkTime();}};
+  var stim_A1L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1L3,
+    options: opciones_A1L3_final, horizontal: false}],
+    data: {pregunta: codigo_A1L3, opciones_mostradas: opciones_A1L3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1L3); checkTime();}};
 bloque_A1.push(stim_A1L3)
 
-    var stim_A1F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1F1,
-      options: opciones_A1F1_final, horizontal: false}],
-      data: {pregunta: codigo_A1F1, opciones_mostradas: opciones_A1F1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1F1); checkTime();}};
+  var stim_A1F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1F1,
+    options: opciones_A1F1_final, horizontal: false}],
+    data: {pregunta: codigo_A1F1, opciones_mostradas: opciones_A1F1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1F1); checkTime();}};
 bloque_A1.push(stim_A1F1)
 
-    var stim_A1F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1F2,
-      options: opciones_A1F2_final, horizontal: false}],
-      data: {pregunta: codigo_A1F2, opciones_mostradas: opciones_A1F2_final.toString()},
-      button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1F2); checkTime();}};
+  var stim_A1F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A1F2,
+    options: opciones_A1F2_final, horizontal: false}],
+    data: {pregunta: codigo_A1F2, opciones_mostradas: opciones_A1F2_final.toString()},
+    button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoA1(trial_data, opciones_A1F2); checkTime();}};
 bloque_A1.push(stim_A1F2)
 
 
 
 // Items A2
-    var stim_A2G1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2G1,
-      options: opciones_A2G1_final, horizontal: false}],
-      data: {pregunta: codigo_A2G1, opciones_mostradas: opciones_A2G1_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2G1); checkTime();}};
+  var stim_A2G1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2G1,
+    options: opciones_A2G1_final, horizontal: false}],
+    data: {pregunta: codigo_A2G1, opciones_mostradas: opciones_A2G1_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2G1); checkTime();}};
 
 bloque_A2.push(stim_A2G1)
 
-    var stim_A2G2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2G2,
-      options: opciones_A2G2_final, horizontal: false}],
-      data: {pregunta: codigo_A2G2, opciones_mostradas: opciones_A2G2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2G2); checkTime();}};
+  var stim_A2G2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2G2,
+    options: opciones_A2G2_final, horizontal: false}],
+    data: {pregunta: codigo_A2G2, opciones_mostradas: opciones_A2G2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2G2); checkTime();}};
 
 bloque_A2.push(stim_A2G2)
 
-    var stim_A2G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2G3,
-       options: opciones_A2G3_final, horizontal: false}],
-       data: {pregunta: codigo_A2G3, opciones_mostradas: opciones_A2G3_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2G3); checkTime();}};
+  var stim_A2G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2G3,
+     options: opciones_A2G3_final, horizontal: false}],
+     data: {pregunta: codigo_A2G3, opciones_mostradas: opciones_A2G3_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2G3); checkTime();}};
 
 bloque_A2.push(stim_A2G3)
 
-    var stim_A2G4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2G4,
-      options: opciones_A2G4_final, horizontal: false}],
-      data: {pregunta: codigo_A2G4, opciones_mostradas: opciones_A2G4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2G4); checkTime();}};
+  var stim_A2G4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2G4,
+    options: opciones_A2G4_final, horizontal: false}],
+    data: {pregunta: codigo_A2G4, opciones_mostradas: opciones_A2G4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2G4); checkTime();}};
 bloque_A2.push(stim_A2G4)
 
-    var stim_A2L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2L1,
-      options: opciones_A2L1_final, horizontal: false}],
-      data: {pregunta: codigo_A2L1, opciones_mostradas: opciones_A2L1_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2L1); checkTime();}};
+  var stim_A2L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2L1,
+    options: opciones_A2L1_final, horizontal: false}],
+    data: {pregunta: codigo_A2L1, opciones_mostradas: opciones_A2L1_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2L1); checkTime();}};
 bloque_A2.push(stim_A2L1)
 
-    var stim_A2L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2L2,
-      options: opciones_A2L2_final, horizontal: false}],
-      data: {pregunta: codigo_A2L2, opciones_mostradas: opciones_A2L2_final.toString()},
-       button_label: boton,
-        on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2L2); checkTime();}};
+  var stim_A2L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2L2,
+    options: opciones_A2L2_final, horizontal: false}],
+    data: {pregunta: codigo_A2L2, opciones_mostradas: opciones_A2L2_final.toString()},
+     button_label: boton,
+      on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2L2); checkTime();}};
 bloque_A2.push(stim_A2L2)
 
-    var stim_A2L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2L3,
-      options: opciones_A2L3_final, horizontal: false}],
-      data: {pregunta: codigo_A2L3, opciones_mostradas: opciones_A2L3_final.toString()},
-      button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2L3); checkTime();}};
+  var stim_A2L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2L3,
+    options: opciones_A2L3_final, horizontal: false}],
+    data: {pregunta: codigo_A2L3, opciones_mostradas: opciones_A2L3_final.toString()},
+    button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2L3); checkTime();}};
 bloque_A2.push(stim_A2L3)
 
-    var stim_A2F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2F1,
-      options: opciones_A2F1_final, horizontal: false}],
-      data: {pregunta: codigo_A2F1, opciones_mostradas: opciones_A2F1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2F1); checkTime();}};
+  var stim_A2F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2F1,
+    options: opciones_A2F1_final, horizontal: false}],
+    data: {pregunta: codigo_A2F1, opciones_mostradas: opciones_A2F1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2F1); checkTime();}};
 bloque_A2.push(stim_A2F1)
 
-    var stim_A2F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2F2,
-      options: opciones_A2F2_final, horizontal: false}],
-      data: {pregunta: codigo_A2F2, opciones_mostradas: opciones_A2F2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2F2); checkTime();}};
+  var stim_A2F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2F2,
+    options: opciones_A2F2_final, horizontal: false}],
+    data: {pregunta: codigo_A2F2, opciones_mostradas: opciones_A2F2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2F2); checkTime();}};
 bloque_A2.push(stim_A2F2)
 
-    var stim_A2F3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2F3,
-      options: opciones_A2F3_final, horizontal: false}],
-      data: {pregunta: codigo_A2F3, opciones_mostradas: opciones_A2F3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2F3); checkTime();}};
+  var stim_A2F3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_A2F3,
+    options: opciones_A2F3_final, horizontal: false}],
+    data: {pregunta: codigo_A2F3, opciones_mostradas: opciones_A2F3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoA2(trial_data, opciones_A2F3); checkTime();}};
 bloque_A2.push(stim_A2F3)
 
 // Items B1
-    var stim_B1G1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1G1,
-      options: opciones_B1G1_final, horizontal: false}],
-      data: {pregunta: codigo_B1G1, opciones_mostradas: opciones_B1G1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1G1); checkTime();}};
+  var stim_B1G1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1G1,
+    options: opciones_B1G1_final, horizontal: false}],
+    data: {pregunta: codigo_B1G1, opciones_mostradas: opciones_B1G1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1G1); checkTime();}};
 bloque_B1.push(stim_B1G1)
 
-    var stim_B1G2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1G2,
-      options: opciones_B1G2_final, horizontal: false}],
-      data: {pregunta: codigo_B1G2, opciones_mostradas: opciones_B1G2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1G2); checkTime();}};
+  var stim_B1G2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1G2,
+    options: opciones_B1G2_final, horizontal: false}],
+    data: {pregunta: codigo_B1G2, opciones_mostradas: opciones_B1G2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1G2); checkTime();}};
 bloque_B1.push(stim_B1G2)
 
-    var stim_B1G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1G3,
-      options: opciones_B1G3_final, horizontal: false}],
-      data: {pregunta: codigo_B1G3, opciones_mostradas: opciones_B1G3_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1G3); checkTime();}};
+  var stim_B1G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1G3,
+    options: opciones_B1G3_final, horizontal: false}],
+    data: {pregunta: codigo_B1G3, opciones_mostradas: opciones_B1G3_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1G3); checkTime();}};
 bloque_B1.push(stim_B1G3)
 
-    var stim_B1G4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1G4,
-      options: opciones_B1G4_final, horizontal: false}],
-      data: {pregunta: codigo_B1G4, opciones_mostradas: opciones_B1G4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1G4); checkTime();}};
+  var stim_B1G4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1G4,
+    options: opciones_B1G4_final, horizontal: false}],
+    data: {pregunta: codigo_B1G4, opciones_mostradas: opciones_B1G4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1G4); checkTime();}};
 bloque_B1.push(stim_B1G4)
 
-    var stim_B1L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1L1,
-      options: opciones_B1L1_final, horizontal: false}],
-      data: {pregunta: codigo_B1L1, opciones_mostradas: opciones_B1L1_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1L1); checkTime();}};
+  var stim_B1L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1L1,
+    options: opciones_B1L1_final, horizontal: false}],
+    data: {pregunta: codigo_B1L1, opciones_mostradas: opciones_B1L1_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1L1); checkTime();}};
 bloque_B1.push(stim_B1L1)
 
-    var stim_B1L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1L2,
-      options: opciones_B1L2_final, horizontal: false}],
-      data: {pregunta: codigo_B1L2, opciones_mostradas: opciones_B1L2_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1L2); checkTime();}};
+  var stim_B1L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1L2,
+    options: opciones_B1L2_final, horizontal: false}],
+    data: {pregunta: codigo_B1L2, opciones_mostradas: opciones_B1L2_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1L2); checkTime();}};
 bloque_B1.push(stim_B1L2)
 
-    var stim_B1L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1L3,
-      options: opciones_B1L3_final, horizontal: false}],
-      data: {pregunta: codigo_B1L3, opciones_mostradas: opciones_B1L3_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1L3); checkTime();}};
+  var stim_B1L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1L3,
+    options: opciones_B1L3_final, horizontal: false}],
+    data: {pregunta: codigo_B1L3, opciones_mostradas: opciones_B1L3_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1L3); checkTime();}};
 bloque_B1.push(stim_B1L3)
 
-    var stim_B1L4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1L4,
-      options: opciones_B1L4_final, horizontal: false}],
-      data: {pregunta: codigo_B1L4, opciones_mostradas: opciones_B1L4_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1L4); checkTime();}};
+  var stim_B1L4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1L4,
+    options: opciones_B1L4_final, horizontal: false}],
+    data: {pregunta: codigo_B1L4, opciones_mostradas: opciones_B1L4_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1L4); checkTime();}};
 bloque_B1.push(stim_B1L4)
 
-    var stim_B1F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1F1,
-      options: opciones_B1F1_final, horizontal: false}],
-      data: {pregunta: codigo_B1F1, opciones_mostradas: opciones_B1F1_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1F1); checkTime();}};
+  var stim_B1F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1F1,
+    options: opciones_B1F1_final, horizontal: false}],
+    data: {pregunta: codigo_B1F1, opciones_mostradas: opciones_B1F1_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1F1); checkTime();}};
 bloque_B1.push(stim_B1F1)
 
-    var stim_B1F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1F2,
-      options: opciones_B1F2_final, horizontal: false}],
-      data: {pregunta: codigo_B1F2, opciones_mostradas: opciones_B1F2_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1F2); checkTime();}};
+  var stim_B1F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1F2,
+    options: opciones_B1F2_final, horizontal: false}],
+    data: {pregunta: codigo_B1F2, opciones_mostradas: opciones_B1F2_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1F2); checkTime();}};
 bloque_B1.push(stim_B1F2)
 
-    var stim_B1F3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1F3,
-      options: opciones_B1F3_final, horizontal: false}],
-      data: {pregunta: codigo_B1F3, opciones_mostradas: opciones_B1F3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1F3); checkTime();}};
+  var stim_B1F3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1F3,
+    options: opciones_B1F3_final, horizontal: false}],
+    data: {pregunta: codigo_B1F3, opciones_mostradas: opciones_B1F3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1F3); checkTime();}};
 bloque_B1.push(stim_B1F3)
 
-    var stim_B1F4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1F4,
-      options: opciones_B1F4_final, horizontal: false}],
-      data: {pregunta: codigo_B1F4, opciones_mostradas: opciones_B1F4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1F4); checkTime();}};
+  var stim_B1F4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B1F4,
+    options: opciones_B1F4_final, horizontal: false}],
+    data: {pregunta: codigo_B1F4, opciones_mostradas: opciones_B1F4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB1(trial_data, opciones_B1F4); checkTime();}};
 bloque_B1.push(stim_B1F4)
 
 // Items B2
-    var stim_B2G1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G1,
-      options: opciones_B2G1_final, horizontal: false}],
-      data: {pregunta: codigo_B2G1, opciones_mostradas: opciones_B2G1_final.toString()},
-       button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G1); checkTime();}};
+  var stim_B2G1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G1,
+    options: opciones_B2G1_final, horizontal: false}],
+    data: {pregunta: codigo_B2G1, opciones_mostradas: opciones_B2G1_final.toString()},
+     button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G1); checkTime();}};
 bloque_B2.push(stim_B2G1)
 
 
-    var stim_B2G2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G2,
-      options: opciones_B2G2_final, horizontal: false}],
-      data: {pregunta: codigo_B2G2, opciones_mostradas: opciones_B2G2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G2); checkTime();}};
+  var stim_B2G2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G2,
+    options: opciones_B2G2_final, horizontal: false}],
+    data: {pregunta: codigo_B2G2, opciones_mostradas: opciones_B2G2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G2); checkTime();}};
 bloque_B2.push(stim_B2G2)
 
-    var stim_B2G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G3,
-      options: opciones_B2G3_final, horizontal: false}],
-      data: {pregunta: codigo_B2G3, opciones_mostradas: opciones_B2G3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G3); checkTime();}};
+  var stim_B2G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G3,
+    options: opciones_B2G3_final, horizontal: false}],
+    data: {pregunta: codigo_B2G3, opciones_mostradas: opciones_B2G3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G3); checkTime();}};
 bloque_B2.push(stim_B2G3)
 
-    var stim_B2G4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G4,
-      options: opciones_B2G4_final, horizontal: false}],
-      data: {pregunta: codigo_B2G4, opciones_mostradas: opciones_B2G4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G4); checkTime();}};
+  var stim_B2G4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G4,
+    options: opciones_B2G4_final, horizontal: false}],
+    data: {pregunta: codigo_B2G4, opciones_mostradas: opciones_B2G4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G4); checkTime();}};
 bloque_B2.push(stim_B2G4)
 
-    var stim_B2G5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G5,
-      options: opciones_B2G5_final, horizontal: false}],
-      data: {pregunta: codigo_B2G5, opciones_mostradas: opciones_B2G5_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G5); checkTime();}};
+  var stim_B2G5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2G5,
+    options: opciones_B2G5_final, horizontal: false}],
+    data: {pregunta: codigo_B2G5, opciones_mostradas: opciones_B2G5_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2G5); checkTime();}};
 bloque_B2.push(stim_B2G5)
 
-    var stim_B2L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L1,
-      options: opciones_B2L1_final, horizontal: false}],
-      data: {pregunta: codigo_B2L1, opciones_mostradas: opciones_B2L1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L1); checkTime();}};
+  var stim_B2L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L1,
+    options: opciones_B2L1_final, horizontal: false}],
+    data: {pregunta: codigo_B2L1, opciones_mostradas: opciones_B2L1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L1); checkTime();}};
 bloque_B2.push(stim_B2L1)
 
-    var stim_B2L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L2,
-      options: opciones_B2L2_final, horizontal: false}],
-      data: {pregunta: codigo_B2L2, opciones_mostradas: opciones_B2L2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L2); checkTime();}};
+  var stim_B2L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L2,
+    options: opciones_B2L2_final, horizontal: false}],
+    data: {pregunta: codigo_B2L2, opciones_mostradas: opciones_B2L2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L2); checkTime();}};
 bloque_B2.push(stim_B2L2)
 
-    var stim_B2L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L3,
-      options: opciones_B2L3_final, horizontal: false}],
-      data: {pregunta: codigo_B2L3, opciones_mostradas: opciones_B2L3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L3); checkTime();}};
+  var stim_B2L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L3,
+    options: opciones_B2L3_final, horizontal: false}],
+    data: {pregunta: codigo_B2L3, opciones_mostradas: opciones_B2L3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L3); checkTime();}};
 bloque_B2.push(stim_B2L3)
 
-    var stim_B2L4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L4,
-      options: opciones_B2L4_final, horizontal: false}],
-      data: {pregunta: codigo_B2L4, opciones_mostradas: opciones_B2L4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L4); checkTime();}};
+  var stim_B2L4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L4,
+    options: opciones_B2L4_final, horizontal: false}],
+    data: {pregunta: codigo_B2L4, opciones_mostradas: opciones_B2L4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L4); checkTime();}};
 bloque_B2.push(stim_B2L4)
 
-    var stim_B2L5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L5,
-      options: opciones_B2L5_final, horizontal: false}],
-      data: {pregunta: codigo_B2L5, opciones_mostradas: opciones_B2L5_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L5); checkTime();}};
+  var stim_B2L5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2L5,
+    options: opciones_B2L5_final, horizontal: false}],
+    data: {pregunta: codigo_B2L5, opciones_mostradas: opciones_B2L5_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2L5); checkTime();}};
 bloque_B2.push(stim_B2L5)
 
-    var stim_B2F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F1,
-      options: opciones_B2F1_final, horizontal: false}],
-      data: {pregunta: codigo_B2F1, opciones_mostradas: opciones_B2F1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F1); checkTime();}};
+  var stim_B2F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F1,
+    options: opciones_B2F1_final, horizontal: false}],
+    data: {pregunta: codigo_B2F1, opciones_mostradas: opciones_B2F1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F1); checkTime();}};
 bloque_B2.push(stim_B2F1)
 
-    var stim_B2F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F2,
-      options: opciones_B2F2_final, horizontal: false}],
-      data: {pregunta: codigo_B2F2, opciones_mostradas: opciones_B2F2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F2); checkTime();}};
+  var stim_B2F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F2,
+    options: opciones_B2F2_final, horizontal: false}],
+    data: {pregunta: codigo_B2F2, opciones_mostradas: opciones_B2F2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F2); checkTime();}};
 bloque_B2.push(stim_B2F2)
 
-    var stim_B2F3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F3,
-      options: opciones_B2F3_final, horizontal: false}],
-      data: {pregunta: codigo_B2F3, opciones_mostradas: opciones_B2F3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F3); checkTime();}};
+  var stim_B2F3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F3,
+    options: opciones_B2F3_final, horizontal: false}],
+    data: {pregunta: codigo_B2F3, opciones_mostradas: opciones_B2F3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F3); checkTime();}};
 bloque_B2.push(stim_B2F3)
 
-    var stim_B2F4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F4,
-      options: opciones_B2F4_final, horizontal: false}],
-      data: {pregunta: codigo_B2F4, opciones_mostradas: opciones_B2F4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F4); checkTime();}};
+  var stim_B2F4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F4,
+    options: opciones_B2F4_final, horizontal: false}],
+    data: {pregunta: codigo_B2F4, opciones_mostradas: opciones_B2F4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F4); checkTime();}};
 bloque_B2.push(stim_B2F4)
 
-    var stim_B2F5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F5,
-      options: opciones_B2F5_final, horizontal: false}],
-      data: {pregunta: codigo_B2F5, opciones_mostradas: opciones_B2F5_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F5); checkTime();}};
+  var stim_B2F5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_B2F5,
+    options: opciones_B2F5_final, horizontal: false}],
+    data: {pregunta: codigo_B2F5, opciones_mostradas: opciones_B2F5_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoB2(trial_data, opciones_B2F5); checkTime();}};
 bloque_B2.push(stim_B2F5)
 
 // Items C1
-    var stim_C1G1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G1,
-      options: opciones_C1G1_final, horizontal: false}],
-      data: {pregunta: codigo_C1G1, opciones_mostradas: opciones_C1G1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G1); checkTime();}};
+  var stim_C1G1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G1,
+    options: opciones_C1G1_final, horizontal: false}],
+    data: {pregunta: codigo_C1G1, opciones_mostradas: opciones_C1G1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G1); checkTime();}};
 bloque_C1.push(stim_C1G1)
 
 
-    var stim_C1G2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G2,
-      options: opciones_C1G2_final, horizontal: false}],
-      data: {pregunta: codigo_C1G2, opciones_mostradas: opciones_C1G2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G2); checkTime();}};
+  var stim_C1G2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G2,
+    options: opciones_C1G2_final, horizontal: false}],
+    data: {pregunta: codigo_C1G2, opciones_mostradas: opciones_C1G2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G2); checkTime();}};
 bloque_C1.push(stim_C1G2)
 
-    var stim_C1G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G3,
-      options: opciones_C1G3_final, horizontal: false}],
-      data: {pregunta: codigo_C1G3, opciones_mostradas: opciones_C1G3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G3); checkTime();}};
+  var stim_C1G3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G3,
+    options: opciones_C1G3_final, horizontal: false}],
+    data: {pregunta: codigo_C1G3, opciones_mostradas: opciones_C1G3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G3); checkTime();}};
 bloque_C1.push(stim_C1G3)
 
-    var stim_C1G4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G4,
-      options: opciones_C1G4_final, horizontal: false}],
-      data: {pregunta: codigo_C1G4, opciones_mostradas: opciones_C1G4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G4); checkTime();}};
+  var stim_C1G4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G4,
+    options: opciones_C1G4_final, horizontal: false}],
+    data: {pregunta: codigo_C1G4, opciones_mostradas: opciones_C1G4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G4); checkTime();}};
 bloque_C1.push(stim_C1G4)
 
-    var stim_C1G5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G5,
-      options: opciones_C1G5_final, horizontal: false}],
-      data: {pregunta: codigo_C1G5, opciones_mostradas: opciones_C1G5_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G5); checkTime();}};
+  var stim_C1G5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1G5,
+    options: opciones_C1G5_final, horizontal: false}],
+    data: {pregunta: codigo_C1G5, opciones_mostradas: opciones_C1G5_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1G5); checkTime();}};
 bloque_C1.push(stim_C1G5)
 
-    var stim_C1L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L1,
-      options: opciones_C1L1_final, horizontal: false}],
-      data: {pregunta: codigo_C1L1, opciones_mostradas: opciones_C1L1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L1); checkTime();}};
+  var stim_C1L1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L1,
+    options: opciones_C1L1_final, horizontal: false}],
+    data: {pregunta: codigo_C1L1, opciones_mostradas: opciones_C1L1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L1); checkTime();}};
 bloque_C1.push(stim_C1L1)
 
-    var stim_C1L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L2,
-      options: opciones_C1L2_final, horizontal: false}],
-      data: {pregunta: codigo_C1L2, opciones_mostradas: opciones_C1L2_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L2); checkTime();}};
+  var stim_C1L2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L2,
+    options: opciones_C1L2_final, horizontal: false}],
+    data: {pregunta: codigo_C1L2, opciones_mostradas: opciones_C1L2_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L2); checkTime();}};
 bloque_C1.push(stim_C1L2)
 
-    var stim_C1L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L3,
-      options: opciones_C1L3_final, horizontal: false}],
-      data: {pregunta: codigo_C1L3, opciones_mostradas: opciones_C1L3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L3); checkTime();}};
+  var stim_C1L3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L3,
+    options: opciones_C1L3_final, horizontal: false}],
+    data: {pregunta: codigo_C1L3, opciones_mostradas: opciones_C1L3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L3); checkTime();}};
 bloque_C1.push(stim_C1L3)
 
-    var stim_C1L4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L4,
-      options: opciones_C1L4_final, horizontal: false}],
-      data: {pregunta: codigo_C1L4, opciones_mostradas: opciones_C1L4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L4); checkTime();}};
+  var stim_C1L4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L4,
+    options: opciones_C1L4_final, horizontal: false}],
+    data: {pregunta: codigo_C1L4, opciones_mostradas: opciones_C1L4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L4); checkTime();}};
 bloque_C1.push(stim_C1L4)
 
-    var stim_C1L5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L5,
-      options: opciones_C1L5_final, horizontal: false}],
-      data: {pregunta: codigo_C1L5, opciones_mostradas: opciones_C1L5_final.toString()},
-      button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L5); checkTime();}};
+  var stim_C1L5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1L5,
+    options: opciones_C1L5_final, horizontal: false}],
+    data: {pregunta: codigo_C1L5, opciones_mostradas: opciones_C1L5_final.toString()},
+    button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1L5); checkTime();}};
 bloque_C1.push(stim_C1L5)
 
-    var stim_C1F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F1,
-      options: opciones_C1F1_final, horizontal: false}],
-      data: {pregunta: codigo_C1F1, opciones_mostradas: opciones_C1F1_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F1); checkTime();}};
+  var stim_C1F1 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F1,
+    options: opciones_C1F1_final, horizontal: false}],
+    data: {pregunta: codigo_C1F1, opciones_mostradas: opciones_C1F1_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F1); checkTime();}};
 bloque_C1.push(stim_C1F1)
 
-    var stim_C1F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F2,
-      options: opciones_C1F2_final, horizontal: false}],
-      data: {pregunta: codigo_C1F2, opciones_mostradas: opciones_C1F2_final.toString()},
-      button_label: boton,
-       on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F2); checkTime();}};
+  var stim_C1F2 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F2,
+    options: opciones_C1F2_final, horizontal: false}],
+    data: {pregunta: codigo_C1F2, opciones_mostradas: opciones_C1F2_final.toString()},
+    button_label: boton,
+     on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F2); checkTime();}};
 bloque_C1.push(stim_C1F2)
 
-    var stim_C1F3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F3,
-      options: opciones_C1F3_final, horizontal: false}],
-      data: {pregunta: codigo_C1F3, opciones_mostradas: opciones_C1F3_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F3); checkTime();}};
+  var stim_C1F3 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F3,
+    options: opciones_C1F3_final, horizontal: false}],
+    data: {pregunta: codigo_C1F3, opciones_mostradas: opciones_C1F3_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F3); checkTime();}};
 bloque_C1.push(stim_C1F3)
 
-    var stim_C1F4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F4,
-      options: opciones_C1F4_final, horizontal: false}],
-      data: {pregunta: codigo_C1F4, opciones_mostradas: opciones_C1F4_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F4); checkTime();}};
+  var stim_C1F4 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F4,
+    options: opciones_C1F4_final, horizontal: false}],
+    data: {pregunta: codigo_C1F4, opciones_mostradas: opciones_C1F4_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F4); checkTime();}};
 bloque_C1.push(stim_C1F4)
 
-    var stim_C1F5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F5,
-      options: opciones_C1F5_final, horizontal: false}],
-      data: {pregunta: codigo_C1F5, opciones_mostradas: opciones_C1F5_final.toString()},
-      button_label: boton,
-      on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F5); checkTime();}};
+  var stim_C1F5 = {type: 'survey-multi-choice', questions: [{prompt: preguntas_C1F5,
+    options: opciones_C1F5_final, horizontal: false}],
+    data: {pregunta: codigo_C1F5, opciones_mostradas: opciones_C1F5_final.toString()},
+    button_label: boton,
+    on_finish: function (trial_data){contadorCorrectoC1(trial_data, opciones_C1F5); checkTime();}};
 bloque_C1.push(stim_C1F5)
 
 
@@ -1062,61 +1103,61 @@ var bloque_C1_RND = jsPsych.randomization.repeat(bloque_C1, 1);
 
 //Trial final para marcar nivel una vez
 var preSave = {
-  type: 'html-keyboard-response',
-  stimulus: '',
-  trial_duration: 10,
-  on_finish: function(trial_data){   
-    
-      if (contador_A1 < 6)                                                                                        {nivel = "inferior a A1"
-    } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
-    } else                                                                                                        {nivel = "C1"
-    }; 
+type: 'html-keyboard-response',
+stimulus: '',
+trial_duration: 10,
+on_finish: function(trial_data){
 
-        
-  jsPsych.data.addDataToLastTrial({
-         niveles: nivel
-       });
-  }
+    if (contador_A1 < 6)                                                                                        {nivel = "inferior a A1"
+  } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
+  } else                                                                                                        {nivel = "C1"
+  };
+
+
+jsPsych.data.addDataToLastTrial({
+       niveles: nivel
+     });
+}
 }
 
 
 // Call function savedata para guardar data completa
 
 var saveFinal = {
-    type: 'call-function',
-    func: function(){
-       if (contador_A1 < 6)                                                                                        {nivel = "inferior a A1"
-    } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
-    } else                                                                                                        {nivel = "C1"
-    }; 
-  jsPsych.data.addProperties({
-         nivelObtenido: nivel
-       });
-  save_data();
+  type: 'call-function',
+  func: function(){
+     if (contador_A1 < 6)                                                                                        {nivel = "inferior a A1"
+  } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
+  } else                                                                                                        {nivel = "C1"
+  };
+jsPsych.data.addProperties({
+       nivelObtenido: nivel
+     });
+save_data();
 
-    }
+  }
 }
 
 // Cierre
 
 var cierre = {
-    type: 'html-keyboard-response',
-    stimulus: function(){
-      var nivel = [];
-     if (contador_A1 < 6)                                                                                         {nivel = "inferior a A1"
-    } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
-    } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
-    } else                                                                                                        {nivel = "C1"
-    }; 
-  return "<div style='padding-top:20px;'><p>Se ha terminado el examen. Su nivel es "+ nivel + "</p><p> Presione cualquier tecla para terminar.</p></div>";
+  type: 'html-keyboard-response',
+  stimulus: function(){
+    var nivel = [];
+   if (contador_A1 < 6)                                                                                         {nivel = "inferior a A1"
+  } else if (contador_A1 >= 6 && contador_A2 < 7)                                                               {nivel = "A1"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 < 8)                                           {nivel = "A2"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 < 10)                      {nivel = "B1"
+  } else if (contador_A1 >= 6 && contador_A2 >= 7 && contador_B1 >= 8 && contador_B2 >= 10 && contador_C1 < 10) {nivel = "B2"
+  } else                                                                                                        {nivel = "C1"
+  };
+return "<div style='padding-top:20px;'><p>Se ha terminado el examen.</p><p> Presione cualquier tecla para terminar.</p></div>";
 
 },
 
@@ -1125,30 +1166,32 @@ var cierre = {
 
 // Crear timeline
 
+
+timeline.push(pedirCredenciales)
 timeline.push(bienvenida)
 timeline.push(pedirNombre)
 timeline.push(instrucciones)
 
 
 for (i=0; i<=7; i++){
-  timeline = timeline.concat(bloque_A1_RND[i]);
+timeline = timeline.concat(bloque_A1_RND[i]);
 }
 
- for (i=0; i<=9; i++){
- timeline = timeline.concat(bloque_A2_RND[i]);
- }
+for (i=0; i<=9; i++){
+timeline = timeline.concat(bloque_A2_RND[i]);
+}
 
- for (i=0; i<=11; i++){
-   timeline = timeline.concat(bloque_B1_RND[i]);
- }
+for (i=0; i<=11; i++){
+ timeline = timeline.concat(bloque_B1_RND[i]);
+}
 
- for (i=0; i<=14; i++){
-   timeline = timeline.concat(bloque_B2_RND[i]);
- }
+for (i=0; i<=14; i++){
+ timeline = timeline.concat(bloque_B2_RND[i]);
+}
 
- for (i=0; i<=14; i++){
-   timeline = timeline.concat(bloque_C1_RND[i]);
- }
+for (i=0; i<=14; i++){
+ timeline = timeline.concat(bloque_C1_RND[i]);
+}
 
 
 timeline.push(preSave)
@@ -1156,13 +1199,13 @@ timeline.push(saveFinal)
 timeline.push(cierre)
 
 
-    /* Empezar el examen*/
+  /* Empezar el examen*/
 jsPsych.init({
-  show_progress_bar: true,
-  timeline: timeline,
-  on_finish: function(){
-  finalAlert();
- //jsPsych.data.displayData();
-  }
+show_progress_bar: true,
+timeline: timeline,
+on_finish: function(){
+finalAlert();
+//jsPsych.data.displayData();
+}
 
 });
