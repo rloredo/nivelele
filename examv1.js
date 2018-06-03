@@ -179,7 +179,7 @@ if (tiempoFinal > tiempoLimite) {
 // Bienvenida
 var bienvenida = {
   type: 'html-keyboard-response',
-  stimulus: "<p style='padding-top:10%'>La credencial ingresada es correcta.<br></p><p> Presione cualquier tecla para comenzar.</p>"
+  stimulus: "<p style='padding-top:10%'>La credencial ingresada es correcta.<br></p><p> Presione cualquier tecla para comenzar.</p><p><div class='g-recaptcha' data-sitekey='6LfI4lEUAAAAAG4od5BtmzBmrH5unjPEy0R6gDmP'></div></p>"
 };
 
 //Credenciales

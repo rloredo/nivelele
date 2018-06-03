@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>A demonstration of how to access a Text Field</h3>
+
+<input type="text" id="texto_a_evaluar" value="Ingrese texto a evaluar">
+
+<p>Click the "Try it" button to get the text in the text field.</p>
+
+<button onclick="myFunction()">Evaluar</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+
+  var str = document.getElementById("texto_a_evaluar").value;
+  n = 0;
+  f = [];
+  count = 0;
+
+  
+
+  while(n >= 0){
+  var n = str.indexOf("hola", n+1);
+  f = f + " " + n;
+  count = count + 1}
+
+    document.getElementById("demo").innerHTML = f+"cantidad"+count;
+}
+
+</script>
+
+</body>
+</html>
