@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link href="estilo.css" rel="stylesheet" type="text/css"></link>
+</head>
 <body>
 
-<h3>A demonstration of how to access a Text Field</h3>
+<h3>Etiquetado de texto según inventarios del PC</h3>
 
-<input type="text" id="texto_a_evaluar" value="Ingrese texto a evaluar">
+<input type="text" id="texto_a_evaluar" value="Ingrese texto a evaluar" size="100">
 
-<p>Click the "Try it" button to get the text in the text field.</p>
+<p>Click "analizar" para etiquetar el texto</p>
 
 <button onclick="myFunction()">Evaluar</button>
 
@@ -15,19 +18,69 @@
 <script>
 function myFunction() {
 
-  var str = document.getElementById("texto_a_evaluar").value;
-  n = 0;
-  f = [];
-  count = 0;
+  var texto_original = document.getElementById("texto_a_evaluar").value;
+  var texto_tageado = texto_original;
+  var dic_1 = ["comida", "perro", "casa", "alimento de mascotas"];
+  var contador_D1 = 0;
 
-  
+                        // Para cada elemento del diccionaro D1
+                          for (var i = 0; i < dic_1.length; i++) {
 
-  while(n >= 0){
-  var n = str.indexOf("hola", n+1);
-  f = f + " " + n;
-  count = count + 1}
+                            //Agarrar el elemento i
+                            encontrar = dic_1[i];
 
-    document.getElementById("demo").innerHTML = f+"cantidad"+count;
+                            //Obtener el largo del elemento
+                            largo = dic_1[i].length
+
+                            //Buscar por primera vez
+                            primera = texto_tageado.indexOf(encontrar);
+
+                                      //Si lo encontró una vez
+                                      if (primera != -1) {
+                                            //Sumar al contador el encuentro del elemento del D1
+                                            var  contador_D1 = contador_D1 + 1
+                                            //Etiquetar
+                                            var texto_tageado = texto_tageado.slice(0, primera) + " <span class='D1'>" + encontrar + "</span> " + texto_tageado.slice(primera + largo)
+
+
+                                            //Definir a partir de qué posición buscar la próxima
+                                            var proxima_posicion = primera + largo + 22
+
+                                            //Buscar la próxima
+                                            var proxima_busqueda = texto_tageado.indexOf(encontrar, proxima_posicion);
+
+                                                    //Mientras haya una próxima
+                                                    while(proxima_busqueda != -1){
+                                                      //Encontrar la próxima ocurrencia
+                                                      var proxima_busqueda = texto_tageado.indexOf(encontrar, proxima_posicion);
+                                                              //Mientras haya una próxima ocurrencia
+                                                              if(proxima_busqueda != -1){
+                                                                //Sumar contador
+                                                                var contador_D1 = contador_D1 + 1
+                                                                //Etiquetar
+                                                                var texto_tageado = texto_tageado.slice(0, proxima_busqueda) + " <span class='D1'>" + encontrar + "</span> " + texto_tageado.slice(proxima_busqueda + largo)
+                                                                //Setear próxima posición a buscar
+                                                                var proxima_posicion = proxima_busqueda + largo + 22;
+                                                              }
+
+                                                                                }
+
+                                                          }
+
+
+
+
+                                                }
+
+
+                        //Diccionardo D2
+
+
+
+
+
+
+document.getElementById("demo").innerHTML = "<div>" + texto_tageado + "</div><div>" + "Cantidad de palabras D1: " + contador_D1 + "</div>";
 }
 
 </script>
