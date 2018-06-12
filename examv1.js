@@ -620,7 +620,7 @@ var codigo_C1F2 = "C1F2";
 var opciones_C1F2 = ["Más aun",  "Más bien",   "Es decir"];
 var opciones_C1F2_RND = jsPsych.randomization.repeat(opciones_C1F2, 1);
 var opciones_C1F2_final = [" a) "+opciones_C1F2_RND[0], " b) "+opciones_C1F2_RND[1], " c) "+opciones_C1F2_RND[2]];
-var preguntas_C1F2 = ["<p style='text-align:justify;'>Una investigación reveló que mantener una temperatura cálida constante en un ambiente cerrado no es favorable para la salud del organismo. __________, la variación gradual del clima puede servir para combatir la obesidad y la diabetes tipo 2.</p><p>&nbsp;<br><b>Opciones:</b></p>"];
+var preguntas_C1F2 = ["<p style='text-align:justify;'>Una de las dificultades que enfrentan las empresas en América Latina es que no encuentran jóvenes capacitados para sus vacantes. Entonces, será imprescindible trabajar en programas educativos que hagan coincidir el talento de los jóvenes con las demandas del mercado. __________, el modelo educativo teórico ha quedado obsoleto. Ahora hay que establecer un vínculo entre el mundo formativo y el laboral, para que los jóvenes puedan enfrentarse al mercado.</p><p>&nbsp;<br><b>Opciones:</b></p>"];
 
 var codigo_C1F3 = "C1F3";
 var opciones_C1F3 = ["Siento perdérmela",  "No hay inconveniente",   "Ni hablar"];
