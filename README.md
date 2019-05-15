@@ -2,7 +2,7 @@
 Examen de nivel
 
 
-Crear base mySql con las siguientes 16 columnas:
+Crear tabla en base mySql con las siguientes 16 columnas:
 
 "rt", "stimulus", "key_press", "trial_type", "trial_index", "time_elapsed", "internal_node_id", "alumno", "nivelObtenido", "responses", "view_history", "pregunta", "opciones_mostradas", "es_correct", "niveles", "value"
 
